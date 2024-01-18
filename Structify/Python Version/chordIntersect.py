@@ -11,7 +11,7 @@ def chordIntersections(chords)->int:
     chordCount:int = 0
     for x, chord in enumerate(chords):
         # Check if they intercept previous chords (Use x for index)
-        print(chord, x)
+        # print(chord, x)
         for i in range(x):
             # Check if they intercept, increment chordCount if they do
             if intercepts(chord[0], chord[1], chords[i][0], chords[i][1]):
@@ -43,7 +43,7 @@ def parseInput(input):
     # the 4 is just an arbitrary radius for the circle to make visualization easier if needed
     for coord in coordList:
         endpoints.append(( 4*math.cos(coord), 4*math.sin(coord) ))
-    for i in range(int(len(endpoints)/2)):
+    for i in range(0, int(len(endpoints)), 2):
         chords.append((endpoints[i],endpoints[i+1]))
     print(chords)
     return chords
