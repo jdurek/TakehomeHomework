@@ -11,16 +11,17 @@ def chordIntersections(chords)->int:
     chordCount:int = 0
     for x, chord in enumerate(chords):
         # Check if they intercept previous chords (Use x for index)
-        # print(chord, x)
+        print(chord, x)
         for i in range(x):
-            # Check if they intercept, increment chordCount if they do
             if intercepts(chord[0], chord[1], chords[i][0], chords[i][1]):
+                # print("Intercepted - Line %s and line %s" % (x, i))
                 chordCount += 1
             continue
     return chordCount
 
+
 # Parses input format into array of tuples (start,end)
-# This also converts from radian format to cartesian coordinates so we can just do intersections using those
+# This also converts from radian format to cartesian coordinates so we can just compute intersections linearly
 def parseInput(input):
     # If there's a mismatching number of inputs, terminate early
     coordList = input[0]
@@ -36,7 +37,6 @@ def parseInput(input):
     # Sort it on the 2nd array, then convert into line segment start/end tuple
     # Silly method for sorting it - 's' becomes just the number, and 'e' is equal to adding 0.5 to it, then we sort
     transformedPairs = list(map(endptCvt, pairList))
-    # Sort coordinates based on our transformed pairs
     transformedPairs, coordList = zip(*sorted(zip(transformedPairs, coordList)))
     
     # Convert from polar coordinates (Radians) to Cartesian coordinates
@@ -45,10 +45,9 @@ def parseInput(input):
         endpoints.append(( 4*math.cos(coord), 4*math.sin(coord) ))
     for i in range(0, int(len(endpoints)), 2):
         chords.append((endpoints[i],endpoints[i+1]))
-    print(chords)
     return chords
 
-# Simple function to transform endpoint data from s/e notation to pure numbers
+# Simple function to transform endpoint data from s/e notation to n, n.5 pairs for sorting
 def endptCvt(endpoint):
     if endpoint[0] == 's':
         return int(endpoint[1:])
@@ -69,9 +68,10 @@ if __name__ == "__main__":
     chords = parseInput(inTest1)
     intersects = chordIntersections(chords)
     print ("%s intercepts with input args" % intersects)
-    # Test Example #2
-    inTest2 = [(0.00, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6), ("e1", "s1", "s2", "e3", "s3", "e2")]
+    # Test Example #2 - 2 points intersect on the edge of the circle (Same starting points)
+    # Result - they're not "inside the circle", so they didn't intercept - returns 2 interceptions from vertical line
+    inTest2 = [(0, 0, 1.5, 4.7, 2, 4), ("s1", "s2", "s3", "e3", "e2", "e1")]
     chords = parseInput(inTest2)
     intersects = chordIntersections(chords)
     print ("%s intercepts with input args" % intersects)
-    pass
+    
