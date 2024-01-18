@@ -1,0 +1,5 @@
+Straightforward Python script - everything is done within standard library
+
+For testing the function itself, modify the __main__ code with the expected arguments in the form of an array of 2 lists (array or tuple, should be agnostic) and run the script.
+
+It doesn't have much in the way of error handling, but can be expanded to have that in the input parser if needed. 
