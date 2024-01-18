@@ -3,3 +3,12 @@ Straightforward Python script - everything is done within standard library
 For testing the function itself, modify the __main__ code with the expected arguments in the form of an array of 2 lists (array or tuple, should be agnostic) and run the script.
 
 It doesn't have much in the way of error handling, but can be expanded to have that in the input parser if needed. 
+
+Current estimation on Big O notation - 
+O(n^2)
+
+Justification - 
+    Made use of Python's built-in sort, which has n log n performance, as part of transforming the input data into line segments on cartesian coordinates. 
+
+    Main loop on intersections compares each element to all other future elements - this is pretty much O(n^2) where n represents a distinct chord, as it has to compare to every other chord at some point
+    
