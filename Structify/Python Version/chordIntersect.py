@@ -13,8 +13,9 @@ def chordIntersections(chords)->int:
         # Check if they intercept previous chords (Use x for index)
         print(chord, x)
         for i in range(x):
-            # Handle math to determine if they intercept other chords given our endpoints
-            
+            # Check if they intercept, increment chordCount if they do
+            if intercepts(chord[0], chord[1], chords[i][0], chords[i][1]):
+                chordCount += 1
             continue
     return chordCount
 
@@ -53,14 +54,24 @@ def endptCvt(endpoint):
         return int(endpoint[1:])
     elif endpoint[0] == 'e':
         return int(endpoint[1:]) + .5
+    
+
+# These two functions handle the intersections - they don't handle colinearity, but with our restrictions - don't need to worry about it
+def orientation(a, b, c):
+    return (c[1] - a[1]) * (b[0] - a[0]) > (b[1] - a[1]) * (c[0] * a[0])
+
+def intercepts(a,b,c,d):
+    return (orientation(a, c, d) != orientation(b, c, d) and orientation(a,b,c) != orientation(a,b,d))
 
 if __name__ == "__main__":
     # Test Example #1
     inTest1 = [(0.78, 1.47, 1.77, 3.92), ("s1", "s2", "e1", "e2")]
     chords = parseInput(inTest1)
-    chordIntersections(chords)
+    intersects = chordIntersections(chords)
+    print ("%s intercepts with input args" % intersects)
     # Test Example #2
     inTest2 = [(0.00, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6), ("e1", "s1", "s2", "e3", "s3", "e2")]
     chords = parseInput(inTest2)
-    chordIntersections(chords)
+    intersects = chordIntersections(chords)
+    print ("%s intercepts with input args" % intersects)
     pass
