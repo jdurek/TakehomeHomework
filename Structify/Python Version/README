@@ -12,3 +12,13 @@ Justification -
 
     Main loop on intersections compares each element to all other future elements - this is pretty much O(n^2) where n represents a distinct chord, as it has to compare to every other chord at some point
     
+
+
+
+Changelog: 1/18/2024
+Realized better method when falling asleep - Implemented it in betterChordIntersect.py - 
+Running it is the same as the above, just change which python file you're calling and it'll perform __main__ for 2 test functions that can be edited.
+
+Runtime on this should be closer to N * N/2, effectively O(N^2), as worst case is it may need to iterate half of the chords to find the matching one when an endpoint is found, and absolute best case is O(2N) where every endpoint is immedeately after the start point
+	
+	
